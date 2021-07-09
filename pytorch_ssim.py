@@ -37,8 +37,8 @@ def _ssim(img1, img2, img3, window, window_size, channel, size_average=True):
     C2 = 0.03 ** 2
     x2=torch.sqrt(sigma2_sq)
     x3=torch.sqrt(sigma3_sq)
-    ssim_map_12 = ((2 * mu1_mu2 + C1) * (2 * sigma12 + C2)) / ((mu1_sq + mu2_sq + C1) * (sigma1_sq + sigma2_sq + C2))
-    ssim_map_13 = ((2 * mu1_mu3 + C1) * (2 * sigma13 + C2)) / ((mu1_sq + mu3_sq + C1) * (sigma1_sq + sigma3_sq + C2))
+    ssim_map_12 = (2 * sigma12 + C2) / (sigma1_sq + sigma2_sq + C2)
+    ssim_map_13 = (2 * sigma13 + C2) / (sigma1_sq + sigma3_sq + C2)
 
     if size_average:
         ssim_map = torch.where(mu2>mu3, ssim_map_12, ssim_map_13)
